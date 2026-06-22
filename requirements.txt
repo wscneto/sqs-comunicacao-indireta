@@ -1,0 +1,14 @@
+# Dependências do projeto SQS - Comunicação Indireta
+# Versões fixadas para garantir reprodutibilidade
+
+# SDK oficial da AWS para Python, que permite interagir com SQS e outros serviços
+boto3==1.43.34
+
+# Carrega variáveis de configuração do arquivo .env para o ambiente
+python-dotenv==1.2.2
+
+# Simula serviços AWS nos testes, sem custo e sem conexão real
+moto[sqs]==5.2.2
+
+# Framework de testes
+pytest==9.1.1
