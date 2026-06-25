@@ -32,12 +32,16 @@ def get_sqs_client(regiao: str | None = None) -> Any:
     Raises:
         SystemExit: Se as credenciais AWS não estiverem configuradas.
     """
+    cfg = carregar_configuracao()
     if regiao is None:
-        cfg = carregar_configuracao()
         regiao = cfg.regiao
 
     try:
-        cliente = boto3.client("sqs", region_name=regiao)
+        cliente = boto3.client(
+            "sqs",
+            region_name=regiao,
+            endpoint_url=cfg.localstack_endpoint,  # None → usa AWS real
+        )
         return cliente
     except botocore.exceptions.NoCredentialsError:
         logger = logging.getLogger(__name__)

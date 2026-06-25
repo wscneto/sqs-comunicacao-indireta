@@ -72,6 +72,7 @@ class Configuracao:
     url_dlq: str
     tempo_espera_segundos: int
     max_recebimentos: int
+    localstack_endpoint: str | None
 
 
 def carregar_configuracao() -> Configuracao:
@@ -93,6 +94,7 @@ def carregar_configuracao() -> Configuracao:
         url_dlq=_obter_variavel("DLQ_URL", obrigatoria=False),
         tempo_espera_segundos=_obter_inteiro("WAIT_TIME_SECONDS", padrao=10),
         max_recebimentos=_obter_inteiro("MAX_RECEIVE_COUNT", padrao=3),
+        localstack_endpoint=os.getenv("LOCALSTACK_ENDPOINT_URL") or None,
     )
 
 
@@ -115,4 +117,5 @@ def carregar_configuracao_completa() -> Configuracao:
         url_dlq=_obter_variavel("DLQ_URL"),
         tempo_espera_segundos=_obter_inteiro("WAIT_TIME_SECONDS", padrao=10),
         max_recebimentos=_obter_inteiro("MAX_RECEIVE_COUNT", padrao=3),
+        localstack_endpoint=os.getenv("LOCALSTACK_ENDPOINT_URL") or None,
     )
