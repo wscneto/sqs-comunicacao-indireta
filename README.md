@@ -6,9 +6,9 @@ Service (SQS)** da AWS.
 
 ## Integrantes
 
-- João Pedro
-- João Victor
-- Marlos Balbino
+- João Pedro Simões da Silva Sousa
+- João Victor Cavalcante da Silva Correia
+- Marlos Balbino Nunes
 - Walter Soares Costa Neto
 
 ## O que este projeto demonstra
@@ -137,4 +137,7 @@ sqs-comunicacao-indireta/
 
 ## Documentação adicional
 
-Em construção...
+- [Documentação oficial Amazon SQS](https://docs.aws.amazon.com/sqs/)
+- [boto3 SQS Reference](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/sqs.html)
+- [moto - Mock AWS Services](https://docs.getmoto.org/)
+- COULOURIS, G. et al. *Sistemas Distribuídos: Conceitos e Projeto*. 5ª ed.
