@@ -122,7 +122,10 @@ sqs-comunicacao-indireta/
 ├── .env.example              # Modelo de configuração
 ├── requirements.txt          # Dependências com versões fixadas
 ├── docs/
-│   ├── Em construção...
+│   ├── diagrams/
+│   │   └── diagramas...      # Diagramas UML da arquitetura do projeto
+│   ├── conceitos.md          # Conceitos fundamentais do SQS
+│   └── relatorio.md          # Relatório do projeto
 ├── src/
 │   ├── config.py             # Carrega e valida a configuração do .env
 │   ├── utils.py              # Cliente SQS, logger, helpers
