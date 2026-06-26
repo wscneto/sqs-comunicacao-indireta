@@ -1,0 +1,28 @@
+@startuml sequencia
+title Diagrama de Sequência — Envio e Consumo de Mensagem
+
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+skinparam ParticipantBackgroundColor #ecf0f1
+skinparam ParticipantBorderColor #34495e
+skinparam ArrowColor #2c3e50
+
+participant "Produtor" as P
+participant "Fila Standard" as F
+participant "Consumidor" as C
+
+P -> F : send_message()
+activate F
+
+C -> F : receive_message()\n(long polling, até 10s)
+F --> C : mensagem (fica invisível)
+activate C
+
+C -> C : processar_mensagem()
+
+C -> F : delete_message()\n(confirma sucesso)
+deactivate C
+note over F : mensagem removida
+deactivate F
+
+@enduml

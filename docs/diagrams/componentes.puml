@@ -1,0 +1,26 @@
+@startuml componentes
+title Comunicação Indireta com Amazon SQS — Diagrama de Componentes
+
+skinparam componentStyle rectangle
+skinparam shadowing false
+skinparam defaultTextAlignment center
+skinparam ArrowColor #2c3e50
+skinparam componentBackgroundColor #ecf0f1
+skinparam componentBorderColor #34495e
+
+component "Produtor\n(src/producer.py)" as Produtor #D6EAF8
+queue "Fila SQS (buffer)\nStandard ou FIFO" as Fila #FCF3CF
+component "Consumidor\n(src/consumer.py)" as Consumidor #D5F5E3
+queue "Dead-Letter Queue\n(demo-dlq)" as DLQ #FADBD8
+
+Produtor -right-> Fila : send_message()
+Fila -right-> Consumidor : receive_message()\n(long polling)
+Consumidor -up-> Fila : delete_message()\n(após processar)
+Fila -down-> DLQ : falha > maxReceiveCount\n(mensagem "envenenada")
+
+note bottom of Fila
+  O produtor nunca fala direto com o consumidor:
+  a fila é o único ponto de contato entre eles.
+end note
+
+@enduml

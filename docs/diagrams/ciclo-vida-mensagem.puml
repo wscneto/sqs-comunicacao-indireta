@@ -1,0 +1,25 @@
+@startuml ciclo-vida-mensagem
+title Ciclo de Vida da Mensagem na Fila SQS
+
+skinparam shadowing false
+skinparam state {
+  BackgroundColor #ecf0f1
+  BorderColor #34495e
+  ArrowColor #2c3e50
+}
+
+[*] --> Disponivel : ENVIADA
+state "Disponível" as Disponivel
+state "Invisível\n(sendo processada)" as Invisivel
+state "Removida" as Removida #D5F5E3
+state "DLQ\n(quarentena)" as DLQ #FADBD8
+
+Disponivel --> Invisivel : receive_message()
+Invisivel --> Removida : DELETE (sucesso)
+Invisivel --> Disponivel : TIMEOUT\n(falha / travamento)
+Disponivel --> DLQ : após N tentativas\n(> maxReceiveCount)
+
+Removida --> [*]
+DLQ --> [*]
+
+@enduml
